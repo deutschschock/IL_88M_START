@@ -1,0 +1,61 @@
+import unittest
+
+from account import *
+
+class TestAccount(unittest.TestCase):
+
+
+    def test_capitalize(self):
+        self.assertEqual(clean_name("sveta"), "Sveta")
+
+    def test_username_from_first_last(self):
+        self.assertEqual(make_username("Sveta", "Sveta"), "sveta_sveta")
+
+    def test_valid_email(self):
+        self.assertTrue(is_valid_email("trin@tra.va"))
+
+    def test_is_invalid_email(self):
+        self.assertFalse(is_valid_email("trin@tra"))
+        self.assertFalse(is_valid_email("trin.tra.va"))
+
+    def test_valid_email_second(self):
+        serf.assertTrue(is_valid_email_second("alex123@gmail.com"))
+
+    def test_invalid_email_without_at_second(self):
+        self.assertFalse(is_valid_email_second("alex123.gmail.com"))
+
+    def test_invalid_email_without_username_second(self):
+        self.assertFalse(is_valid_email_second("@gmail.com"))
+
+    def test_invalid_email_without_domain_second(self):
+        self.assertFalse(is_valid_email_second("test@"))
+
+class TestUserProfile(unittest.TestCase):
+    def setup(self):
+        self.user = {
+            "name": "Alex",
+            "email": "alex@gmail.com",
+            "role":["user"],
+        }
+    def test_profile_has_name(self):
+        self.assertEqual(self.user["name"], "Alex")
+
+    def test_valid_email(self):
+        self.assertTrue(is_valid_email_second(self.user["email"]))
+
+    def test_add_new_role(self ):
+        self.user["role"].append("administrator")
+        self.assertIn("administrator", self.user["role"])
+        self.assertEqual(len(self.user["role"]), 2)
+
+    def test_remove_role(self):
+        self.user["role"].remove("administrator")
+        self.assertEqual(len(self.user["role"]), 2)
+
+class TestGetInitials(unittest.TestCase):
+    def test_get_normal_initials(self):
+        self.assertEqual(get_initials("Alex Schock"), "A.G.")
+
+    def test_str_empty_with_raise(self):
+        with self.assertRaises(ValueError):
+            get_initials("   ")
