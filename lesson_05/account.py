@@ -45,3 +45,4 @@ def get_initials(full_name):
     parts = full_name.split()
     initials = [part[0].upper() for part in parts]
     return "".join(initials)+"."
+

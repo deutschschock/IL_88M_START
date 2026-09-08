@@ -31,7 +31,7 @@ class TestAccount(unittest.TestCase):
         self.assertFalse(is_valid_email_second("test@"))
 
 class TestUserProfile(unittest.TestCase):
-    def setup(self):
+    def setUp(self):
         self.user = {
             "name": "Alex",
             "email": "alex@gmail.com",
@@ -54,7 +54,7 @@ class TestUserProfile(unittest.TestCase):
 
 class TestGetInitials(unittest.TestCase):
     def test_get_normal_initials(self):
-        self.assertEqual(get_initials("Alex Schock"), "A.G.")
+        self.assertEqual(get_initials("Alex Schock"), "A.S.")
 
     def test_str_empty_with_raise(self):
         with self.assertRaises(ValueError):
